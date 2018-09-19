@@ -18,7 +18,8 @@ public class ReposApiTest {
         given().contentType(ContentType.JSON).
                 auth().oauth2(ua.getToken()).
                 when().get(ra.getRepoApiPath()).
-                then().assertThat().statusCode(200).and().contentType(ContentType.JSON);
+                then().assertThat().statusCode(200).and().
+                contentType(ContentType.JSON);
     }
 
     @Test
@@ -26,7 +27,8 @@ public class ReposApiTest {
         given().contentType(ContentType.JSON).
                 auth().oauth2(ua.getToken()).
                 when().get(ra.getRepoApiPath()).
-                then().assertThat().statusCode(200).and().contentType(ContentType.JSON).and().
+                then().assertThat().statusCode(200).and().
+                contentType(ContentType.JSON).and().
                 body("name[0]", equalTo("dogoo"));
     }
 
@@ -34,7 +36,7 @@ public class ReposApiTest {
     public void deleteRepoTest() {
         given().contentType(ContentType.JSON).
                 auth().oauth2(ua.getToken()).
-                when().delete("https://api.github.com/users/laujorge/repos/GitApiTests").
+                when().delete(ra.getRepoToDelete()).
                 then().assertThat().statusCode(204).and().
                 body("status", equalTo("OK"));
     }
@@ -45,7 +47,8 @@ public class ReposApiTest {
                 auth().oauth2(ua.getToken()).
                 body(ra.getRepoBody()).
                 when().post(ra.getRepoEditPath()).
-                then().assertThat().statusCode(200).and().contentType(ContentType.JSON);
+                then().assertThat().statusCode(200).and().
+                contentType(ContentType.JSON);
     }
 
 }
